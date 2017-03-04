@@ -1,0 +1,17 @@
+server:
+  port: 8889
+spring:
+  application:
+    name: eureka-server
+    
+eureka:
+  #dashboard:
+  #  path: /dashboard
+  instance:
+    hostname: peer2
+    leaseRenewalIntervalInSeconds: 3
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8888/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0

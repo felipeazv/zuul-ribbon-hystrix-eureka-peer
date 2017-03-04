@@ -1,0 +1,51 @@
+############################ SPRING-BOOT ###########################################           
+spring:
+  application:
+    name: api-service
+server:
+  port: 80 
+
+############################ EUREKA ###########################################           
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.instance_id:${random.value}}   
+  client:
+    serviceUrl:
+      #defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://127.0.0.1:8888/eureka/, http://127.0.0.1:8889/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+      
+############################ZUUL###########################################
+zuul:
+  prefix: /api
+  #  Uncomment to disable auto-registering all services read from Eureka
+  ignoredServices: '*'
+  routes:
+    redirect-google:
+      path: /redirect/**
+      url: http://google.com
+    
+    some-service:
+      path: /some-service/**  
+      serviceId: some-service
+      #url: http://localhost:53571/
+ 
+    produto1:
+      path: /produto1/**  
+      serviceId: produto1
+      
+    produto2:
+      path: /produto2/**  
+      serviceId: produto2
+
+
+
+#logging:
+#  level:
+#    org.springframework: FULL
+
+ 
